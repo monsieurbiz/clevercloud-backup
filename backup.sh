@@ -38,7 +38,7 @@ done;
 env | grep BACKUP_PATH | while read -r line; do
     read backupPath <<< `echo $line | awk -F= {'print $2'}`
     pathname=`basename $backupPath`
-    tar -cvzf $backupsDir/$pathname.$date.tgz --exclude-vcs --exclude=cache/ $backupPath
+    tar -cvzpf $backupsDir/$pathname.$date.tgz --force-local --directory=$APP_HOME/$backupPath --exclude-vcs --exclude=cache/* .
 done;
 
 # Send it to S3
