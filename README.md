@@ -5,11 +5,11 @@ We have an application which runs the backup script itself.
 
 ## Setup
 
-You must create a `static` or `PHP` application:
+You must create a `static-apache` or `php` application:
 
 ```
-clever create -a backup -o "ORG NAME or ID" --type node --region par --github "monsieurbiz/clevercloud-backup" "backup-app"
-clever scale -a backup --flavor small
+clever create -a backup -o "ORG NAME or ID" --type static-apache --region par --github "monsieurbiz/clevercloud-backup" "backup-app"
+clever scale -a backup --flavor M
 clever config -a backup update --enable-zero-downtime --enable-cancel-on-push
 ```
 
@@ -55,7 +55,8 @@ Then you can use a cronjob like this:
 0 */12 * * * $ROOT/backup-please.sh
 ```
 
-Your main app will need the following variables as well: `CLEVER_TOKEN`, `CLEVER_SECRET`, `BACKUP_APP`.
+Your main app will need the following variables as well: `CLEVER_TOKEN`, `CLEVER_SECRET`, `BACKUP_APP`.  
+Using a `$config` addon is helpful.
 
 Enjoy!
 
