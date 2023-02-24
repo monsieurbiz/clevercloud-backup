@@ -38,7 +38,7 @@ done;
 env | grep BACKUP_PATH | while read -r line; do
     read backupPath <<< `echo $line | awk -F= {'print $2'}`
     pathname=`basename $backupPath`
-    echo tar cvzf $backupsDir/$pathname.$date.tgz ./$backupPath
+    tar cvzf $backupsDir/$pathname.$date.tgz ./$backupPath
 done;
 
 # Send it to S3
