@@ -5,7 +5,7 @@ set -o errexit
 # If we are not the backup app, let's stop
 if [[ "$BACKUP_APP" != "$APP_ID" ]]; then
     echo "The backup app is incorrect. Both APP_ID and BACKUP_APP are different." 1>&2
-    return 1
+    return 0
 fi
 
 # Sure?
