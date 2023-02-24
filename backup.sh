@@ -5,13 +5,13 @@ set -o errexit
 # If we are not the backup app, let's stop
 if [[ "$BACKUP_APP" != "$APP_ID" ]]; then
     echo "The backup app is incorrect. Both APP_ID and BACKUP_APP are different." 1>&2
-    return 0
+    exit 0
 fi
 
 # Sure?
 if [[ "$BACKUP_PLEASE_MY_LOVELY_SCRIPT" != "true" ]]; then
     echo "This app is running without the safety flag BACKUP_PLEASE_MY_LOVELY_SCRIPT set to true. It won't backup."
-    return 0
+    exit 0
 fi
 
 # Do not backup twice in a row, let's be sure of that!
