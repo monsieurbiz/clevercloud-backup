@@ -60,6 +60,14 @@ Using a `$config` addon is helpful.
 
 Enjoy!
 
+## Troubleshooting
+
+### How to SSH on the Backup App instance ?
+
+You just need to set two specific environment variables: `CC_TROUBLESHOOT=true` and `CC_PRE_BUILD_HOOK=false`
+
+Then you just have to start the instance! And use the Clever Cloud CLI to SSH to it!
+
 ## License
 
 This project is completely free and released under the [MIT License](https://github.com/monsieurbiz/clevercloud-backup/blob/master/LICENSE.txt).
