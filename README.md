@@ -26,9 +26,9 @@ The application uses some environment variables to run: (those can be in a `$con
 - `BACKUP_KEEP=30 days` to keep only backups for 30 days, as example here.
 - `BACKUP_BUCKET=project-backups` is the name of the bucket we need to use in the S3 Cellar.
 - `BACKUP_APP=app_…` is the code of the backup application itself. The backup script tests this value to be the same as its own `$APP_ID`.
-- `BACKUP_MYSQL_*=user:pass:host:port:database:alias` are specific variables for MySQL backups. The format is quite simple, the fields are `:` separated.  
+- `BACKUP_MYSQL_*=user:pass:host:port:database:alias` (optional) are specific variables for MySQL backups. The format is quite simple, the fields are `:` separated.  
   The `alias` is used for the backup filename, it helps a lot since Clever Cloud databases are quite random.
-- `BACKUP_PATH_*=path/from/app/this-is-my-backup` are specific variables for FileSystem backups. Each variable contains a path of the files to backup.  
+- `BACKUP_PATH_*=path/from/app/this-is-my-backup` (optional) are specific variables for FileSystem backups. Each variable contains a path of the files to backup.  
   The directory name is used for the tarball file, so please be careful on this!
 
 Of course your Backup Application needs to have the FS Buckets mounted where they have to.  
@@ -36,10 +36,15 @@ As example for the `BACKUP_PATH` previously set, you should have a bucket mounte
 `CC_FS_BUCKET_1=path/from/app/this-is-my-backup:fs_bucket_host`
 
 Some other environment variables are need for the backup application only (not in the `$config` addon!!):
-- `CC_RUN_COMMAND=backup.sh` tells Clever Cloud to run the backup script on startup.
+- `CC_RUN_COMMAND=./backup.sh` tells Clever Cloud to run the backup script on startup.
 - `CC_TASK=true` tells Clever Cloud to stop the application once the backup is finished.
 
 Running the backup application will create an environment variable named `BACKUP_PLEASE_MY_LOVELY_SCRIPT`, this is perfectly normal.
+
+The backup application also has access to those variables through the linked Cellar:
+- `CELLAR_ADDON_HOST`
+- `CELLAR_ADDON_KEY_ID`
+- `CELLAR_ADDON_KEY_SECRET`
 
 ## How to run the backup itself?
 
