@@ -30,7 +30,7 @@ mkdir -p $backupsDir
 # Format to use: BACKUP_MYSQL(_[0-9]+)?=user:pass:host:port:database:alias
 env | grep BACKUP_MYSQL | while read line; do
     IFS=":" read -r user pass host port db alias <<< `echo $line | awk -F= {'print $2'}`
-    mysqldump -v -e --single-transaction -h$host -P$port -u$user -p$pass $db | gzip > $backupsDir/$alias.$db.$date.sql.gz
+    mysqldump -v -e --single-transaction --no-tablespaces -h$host -P$port -u$user -p$pass $db | gzip > $backupsDir/$alias.$db.$date.sql.gz
 done;
 
 # Backup filesystems
