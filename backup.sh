@@ -43,7 +43,7 @@ done;
 
 # Send it to S3
 envsubst < $APP_HOME/s3cfg.dist > $APP_HOME/s3cfg
-s3cmd -c $APP_HOME/s3cfg put $backupsDir/* s3://$BACKUP_BUCKET
+s3cmd -c $APP_HOME/s3cfg put --multipart-chunk-size-mb=30 $backupsDir/* s3://$BACKUP_BUCKET
 
 # Clean
 rm -rf $backupsDir
