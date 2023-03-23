@@ -55,6 +55,10 @@ env | grep BACKUP_PATH | while read -r line; do
     rm -f $backupsDir/$pathname.$date.tgz
 done;
 
+# Latest backup date
+echo $date > $backupsDir/latest_backup_date.txt
+s3cmd -c $APP_HOME/s3cfg put $backupsDir/latest_backup_date.txt s3://$BACKUP_BUCKET
+
 # Remove old files
 s3cmd -c $APP_HOME/s3cfg ls s3://$BACKUP_BUCKET | while read -r line;
 do
