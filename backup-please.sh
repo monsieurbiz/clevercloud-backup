@@ -6,6 +6,10 @@ if [[ "${INSTANCE_NUMBER}" != "0" ]]; then
     return 0;
 fi
 
+if [[ "${BACKUP_APP}" == "" ]]; then
+    return 0;
+fi
+
 cd $APP_HOME
 
 clever login --token $CLEVER_TOKEN --secret $CLEVER_SECRET
