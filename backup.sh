@@ -35,6 +35,7 @@ env | grep BACKUP_MYSQL | while read line; do
     mysqldump -v -e \
         --single-transaction \
         --no-tablespaces \
+        --column-statistics=0 \
         -h$host -P$port -u$user -p$pass $db \
     | gzip \
     | s3cmd -c $APP_HOME/s3cfg put - --multipart-chunk-size-mb=$chunkSize s3://$BACKUP_BUCKET/$alias.$db.$date.sql.gz
