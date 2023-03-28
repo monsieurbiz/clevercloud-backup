@@ -76,4 +76,7 @@ do
 done;
 
 # List the cellar
-s3cmd -c $APP_HOME/s3cfg ls s3://$BACKUP_BUCKET | sort -r | head -50
+echo "======================== List of today's files in S3 ========================"
+s3cmd -c $APP_HOME/s3cfg ls -H s3://$BACKUP_BUCKET | grep $date
+echo "======================= List of latest 50 files in S3 ======================="
+s3cmd -c $APP_HOME/s3cfg ls -H s3://$BACKUP_BUCKET | sort -r | head -50
