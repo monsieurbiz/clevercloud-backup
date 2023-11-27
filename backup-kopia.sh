@@ -28,7 +28,8 @@ kopia repository status ||  kopia repository connect s3 \
   --bucket=$BACKUP_BUCKET \
   --access-key=$CELLAR_ADDON_KEY_ID \
   --secret-access-key=$CELLAR_ADDON_KEY_SECRET \
-  --endpoint=$CELLAR_ADDON_HOST
+  --endpoint=$CELLAR_ADDON_HOST \
+  --override-hostname=${APP_ID}
 
 SERVICE_EXIT_STATUS=$?
 if [ $SERVICE_EXIT_STATUS -ne 0 ];then
