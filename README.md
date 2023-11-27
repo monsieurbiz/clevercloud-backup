@@ -46,6 +46,13 @@ The backup application also has access to those variables through the linked Cel
 - `CELLAR_ADDON_KEY_ID`
 - `CELLAR_ADDON_KEY_SECRET`
 
+**For backup with kopia**
+
+```
+clever env -a backup set CC_PRE_RUN_HOOK ./clevercloud/pre_run_hook.sh
+clever env -a backup set CC_RUN_COMMAND ./backup-kopia.sh
+```
+
 ## How to run the backup itself?
 
 You need to copy the `backup-please.sh` script into your own main application.
