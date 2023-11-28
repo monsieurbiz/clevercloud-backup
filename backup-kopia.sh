@@ -57,7 +57,7 @@ done;
 env | grep BACKUP_PATH | while read -r line; do
     read backupPath <<< `echo $line | awk -F= {'print $2'}`
 
-    # @TODO: ignore list
+    # @TODO: move ignore list in ENV variable
     kopia policy set --add-ignore cache ${APP_HOME}/${backupPath}
 
     kopia snapshot create ${APP_HOME}/${backupPath}
@@ -67,6 +67,6 @@ done;
 kopia snapshot verify
 SERVICE_EXIT_STATUS=$?
 if [ $SERVICE_EXIT_STATUS -ne 0 ];then
-    echo "Please check the validity the Ooprint snapshots and fix them: https://kopia.io/docs/advanced/consistency/#repairing-corruption" \
-        | mail -s "Kopia Snpashots are unvalid" ${ALERT_EMAIL}
+    echo "Please check the validity the snapshots and fix them: https://kopia.io/docs/advanced/consistency/#repairing-corruption"
+    exit 2
 fi;
