@@ -43,7 +43,8 @@ mkdir -p $APP_HOME/db-backups
 env | grep BACKUP_MYSQL | while read line; do
     IFS=":" read -r user pass host port db alias <<< `echo $line | awk -F= {'print $2'}`
     # Dump & Upload
-    mysqldump -v -e \
+    mysqldump -v \
+        --extended-insert \
         --single-transaction \
         --no-tablespaces \
         --column-statistics=0 \
