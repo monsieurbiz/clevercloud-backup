@@ -46,6 +46,7 @@ env | grep BACKUP_MYSQL | while read line; do
     mysqldump -v \
         --extended-insert \
         --single-transaction \
+        --quick \
         --no-tablespaces \
         --column-statistics=0 \
         -h$host -P$port -u$user -p$pass $db \
