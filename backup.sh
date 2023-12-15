@@ -32,8 +32,10 @@ envsubst < $APP_HOME/s3cfg.dist > $APP_HOME/s3cfg
 env | grep BACKUP_MYSQL | while read line; do
     IFS=":" read -r user pass host port db alias <<< `echo $line | awk -F= {'print $2'}`
     # Dump & Upload
-    mysqldump -v -e \
+    mysqldump -v \
+        --extended-insert \
         --single-transaction \
+        --quick \
         --no-tablespaces \
         --column-statistics=0 \
         -h$host -P$port -u$user -p$pass $db \
